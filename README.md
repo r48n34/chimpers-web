@@ -1,7 +1,7 @@
 # chimpers-web
 Web version chimpers to Hide files / zip / images in text by hidden format.
 
-[Web Demo](https://chimpers-sigma.vercel.app/) | [npm](https://www.npmjs.com/package/chimpers) | [Github](https://github.com/r48n34/chimpers)
+[Web Demo](https://chimpers-sigma.vercel.app/) | [chimpers npm](https://www.npmjs.com/package/chimpers) | [chimpers-web npm](https://www.npmjs.com/package/chimpers-web) | [Github](https://github.com/r48n34/chimpers)
 
 ## Install 
 ```bash
