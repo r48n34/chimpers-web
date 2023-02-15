@@ -1,7 +1,17 @@
-import { hiddenCharTobin, hiddenCharTobinNum } from "../data/dataChar";
+import { hiddenCharTobin } from "../data/dataChar";
+import { stringDataDecode } from "../data/stringDataDecode";
 
-export function stringDataToBuffer(encodedText: string){
-    let finalArray = encodedText.split(" ")[0].split("").filter( v => hiddenCharTobinNum.indexOf(v.charCodeAt(0)) >= 0 );
+interface stringDataToBufferOptions {
+    integrityMode?: boolean
+}
+
+export function stringDataToBuffer(encodedText: string, option?: stringDataToBufferOptions ){
+    const finalOption = {
+        integrityMode: false,
+        ...option
+    }
+
+    let finalArray = stringDataDecode(encodedText, finalOption.integrityMode)
 
     if(finalArray.length % 4 !== 0){
         throw new Error("Invalid input encodedText.")

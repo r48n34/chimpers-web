@@ -7,6 +7,7 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "dev": "ts-node src/index.ts",
+    "t": "ts-node src/play.ts",
     "build": "tsc",
     "buildWeb": "swc ./src/utilis/dataCode -o ./webOutput/index.min.js --config-file .swcrc",
     "test": "jest --maxWorkers 2"
