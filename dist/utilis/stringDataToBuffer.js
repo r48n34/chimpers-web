@@ -2,8 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.stringDataToBuffer = void 0;
 const dataChar_1 = require("../data/dataChar");
-function stringDataToBuffer(encodedText) {
-    let finalArray = encodedText.split(" ")[0].split("").filter(v => dataChar_1.hiddenCharTobinNum.indexOf(v.charCodeAt(0)) >= 0);
+const stringDataDecode_1 = require("../data/stringDataDecode");
+function stringDataToBuffer(encodedText, option) {
+    const finalOption = Object.assign({ integrityMode: false }, option);
+    let finalArray = (0, stringDataDecode_1.stringDataDecode)(encodedText, finalOption.integrityMode);
     if (finalArray.length % 4 !== 0) {
         throw new Error("Invalid input encodedText.");
     }

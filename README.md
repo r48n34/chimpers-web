@@ -18,14 +18,16 @@ yarn add chimpers-web
 ```ts
 import { stringDataToBuffer, encodeFile } from "chimpers-web"
 
-
 ( async () => {
 
     // encode a file to hidden string array
     let resultString = encodeFile(bufferArray)
 
     // decode whole encoded string and extract the hidden file Uint8Array
-    let resultUint8Array = stringDataToBuffer("Hello world mate")
+    let resultUint8Array = stringDataToBuffer(
+        "Hello world mate", 
+        { integrityMode: false } // Optional, true means the encode process active the integrityMode
+    )
 
 })()
 ```

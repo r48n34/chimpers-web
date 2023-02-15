@@ -1,6 +1,6 @@
 {
   "name": "chimpers-web",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "hide files in text",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
