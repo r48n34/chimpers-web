@@ -2,7 +2,7 @@
 Web version chimpers to Hide files / zip / images in text by hidden format.
 Works in React / Svelte
 
-[Web Demo](https://chimpers-sigma.vercel.app/) | [chimpers npm](https://www.npmjs.com/package/chimpers) | [chimpers-web npm](https://www.npmjs.com/package/chimpers-web) | [Github](https://github.com/r48n34/chimpers)
+[Web Demo](https://chimpers-web.vercel.app/) | [chimpers npm](https://www.npmjs.com/package/chimpers) | [chimpers-web npm](https://www.npmjs.com/package/chimpers-web) | [Github](https://github.com/r48n34/chimpers)
 
 ## Install 
 ```bash
