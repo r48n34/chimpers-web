@@ -11,7 +11,7 @@ export function dec2bin(dec:number) {
     return decStr
 }
 
-export function encodeFile(data: Buffer): string[] {
+export function encodeFile(data: Buffer | Uint8Array): string[] {
 
     let finalArray:string[] = [] 
 
