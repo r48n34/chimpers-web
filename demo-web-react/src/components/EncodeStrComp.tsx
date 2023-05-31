@@ -68,17 +68,19 @@ function EncodeStrComp(){
             <Textarea
                 placeholder="inputString"
                 minRows={3}
-                label="inputString"
+                label="Input String"
                 withAsterisk
                 {...form.getInputProps('inputString')}
             />
 
             <FileInput
+                mt={12}
                 placeholder="Pick file"
-                label="Your resume"
+                label="File"
                 withAsterisk
                 {...form.getInputProps('fileInput')}
             />
+            <Text c="dimmed" fz="xs" mt={4}>Should not be bigger than 1.4MB</Text>
 
             <Group position="right" mt="md">
                 <Button type="submit" variant="light" loading={isLoading}>Submit</Button>
