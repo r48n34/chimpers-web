@@ -13,8 +13,8 @@
   },
   "keywords": ["cipher", "steganography", "hacking", "infosec"],
   "author": "reemo",
-  "homepage": "https://github.com/r48n34/chimpers",
-  "repository": "https://github.com/r48n34/chimpers",
+  "homepage": "https://github.com/r48n34/chimpers-web",
+  "repository": "https://github.com/r48n34/chimpers-web",
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^29.2.3",
