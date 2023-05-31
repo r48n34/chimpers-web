@@ -24,7 +24,7 @@ import { addFileInText, decodeFileInText } from "chimpers-web"
     const file: File = new File() // Or File that read from <input type"file">
     const encodedString: string = await addFileInText("Hello world", file);
 
-    const decodeFileInText: Uint8Array = decodeFileInText(encodedString);
+    const fileArray: Uint8Array = decodeFileInText(encodedString);
 
 })()
 ```
