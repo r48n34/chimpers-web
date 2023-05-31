@@ -46,3 +46,48 @@ export function decodeFileInText(
     encodedText: string, 
 ): Uint8Array
 ```
+
+## Demo in web
+
+### React
+[Github code](https://github.com/r48n34/chimpers-web/tree/main/demo-web-react)
+
+```tsx
+import { useState } from "react";
+import { addFileInText, decodeFileInText } from "chimpers-web"
+
+export default function FileUploadSingle() {
+  const [file, setFile] = useState<File>();
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    e.target.files && setFile(e.target.files[0]);
+  };
+
+  const processString = async () => {
+    if (!file) {
+      return;
+    }
+
+    // Encode text
+    const resultString: string = await addFileInText(
+        "Hello mate",
+        file
+    );
+
+    // Decode text
+    const decodeFile: Uint8Array = decodeFileInText(resultString);
+  };
+
+  return (
+    <div>
+        <input type="file" onChange={handleFileChange} />
+        <button onClick={processString}>
+            Process
+        </button>
+    </div>
+  );
+}
+```
+
+### Svelte
+[Github code](https://github.com/r48n34/chimpers-web/tree/main/demo-web-svelte)
