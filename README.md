@@ -7,7 +7,7 @@ Works in React / Svelte
 [chimpers-web npm](https://www.npmjs.com/package/chimpers-web) | 
 [Github](https://github.com/r48n34/chimpers-web)
 
-## Install 
+## 🚀 Install 
 ```bash
 npm i chimpers-web
 yarn add chimpers-web
