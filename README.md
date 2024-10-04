@@ -1,4 +1,4 @@
-# chimpers-web
+# 🙈 chimpers-web
 Web version chimpers to Hide files / zip / images in text by hidden format.
 Works in React / Svelte
 
@@ -13,12 +13,12 @@ npm i chimpers-web
 yarn add chimpers-web
 ```
 
-## Notices
+## 💻 Notices
 1. Hidden file is not encrypted currently. 
 2. Do not attempt to hide large file.
 3. Single file that smaller than 4kb is recommended.
 
-## Usage
+## 😊 Usage
 ```ts
 import { addFileInText, decodeFileInText } from "chimpers-web"
 
@@ -32,7 +32,7 @@ import { addFileInText, decodeFileInText } from "chimpers-web"
 })()
 ```
 
-## Utilis
+## 🔧 Utilis
 ```ts
 // Hide files in text
 export async function addFileInText(
@@ -47,7 +47,7 @@ export function decodeFileInText(
 ): Uint8Array
 ```
 
-## Demo in web
+## 🌐 Demo for web usage
 
 ### React
 [Github code](https://github.com/r48n34/chimpers-web/tree/main/demo-web-react)
