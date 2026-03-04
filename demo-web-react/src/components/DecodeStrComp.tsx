@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Card, Textarea, Stack, Center, rem, Alert,Group } from "@mantine/core";
+import { Button, Card, Textarea, Stack, rem, Alert,Group } from "@mantine/core";
 import { decodeFileInText } from "chimpers-web"
 import toast from "react-hot-toast";
 import { filetypeinfo } from "magic-bytes.js"

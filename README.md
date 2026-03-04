@@ -1,6 +1,6 @@
 # 🙈 chimpers-web
 Web version chimpers to Hide files / zip / images in text by hidden format.
-Works in React / Svelte
+Works in React.  
 
 [Web Demo](https://chimpers-web.vercel.app/) |
 [chimpers npm](https://www.npmjs.com/package/chimpers) | 
@@ -88,6 +88,3 @@ export default function FileUploadSingle() {
   );
 }
 ```
-
-### Svelte
-[Github code](https://github.com/r48n34/chimpers-web/tree/main/demo-web-svelte)

@@ -11,7 +11,6 @@ function ToggleThemeBtn() {
             variant="light"
             color={dark ? 'yellow' : 'blue'}
             onClick={() => toggleColorScheme()}
-            // title="Toggle color scheme"
         >
             {dark ? <IconSunHigh size={16} /> : <IconMoonFilled size={16} />}
         </ActionIcon>
