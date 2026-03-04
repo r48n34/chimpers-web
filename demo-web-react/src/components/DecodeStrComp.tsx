@@ -1,17 +1,17 @@
 import { useState } from "react";
-import { Button, Card, Group, Text, Textarea, Stack, Center, rem, Alert } from "@mantine/core";
+import { Button, Card, Textarea, Stack, Center, rem, Alert,Group } from "@mantine/core";
 import { decodeFileInText } from "chimpers-web"
 import toast from "react-hot-toast";
 import { filetypeinfo } from "magic-bytes.js"
 import { uuidSmall } from "../utils/uuid";
-import { IconDownload, IconInfoCircle, IconFileSearch } from "@tabler/icons-react";
+import { IconInfoCircle, IconFileSearch,IconClearAll } from "@tabler/icons-react";
 
 function DecodeStrComp() {
 
     const [inputString, setInputString] = useState<string>("");
 
     function decodeString() {
-        if (!inputString || !inputString.includes(" ")) {
+        if (!inputString) {
             toast.error("Please enter a valid encoded string containing space", { position: "top-right" });
             return
         }
@@ -41,7 +41,7 @@ function DecodeStrComp() {
         link.download = `chimpers_decoded_${uuidSmall()}.${fileType}`;
         link.click();
 
-        toast.success(`Success! Downloaded hidden ${fileType.toUpperCase()} file.`, {
+        toast.success(`Success! Downloaded hidden ${fileType!.toUpperCase()} file.`, {
             position: "top-right",
             duration: 4000
         })
@@ -70,7 +70,16 @@ function DecodeStrComp() {
                     onChange={(event) => setInputString(event.currentTarget.value)}
                 />
 
-                <Center mt="md">
+                <Group justify="space-between" mt="md">
+                    <Button 
+                        size="md" 
+                        variant="outline"
+                        onClick={() => setInputString("")} 
+                        leftSection={<IconClearAll style={{ width: rem(18), height: rem(18) }} />}
+                    >
+                        Clear Text
+                    </Button>
+
                     <Button 
                         size="md" 
                         onClick={() => decodeString()} 
@@ -79,7 +88,7 @@ function DecodeStrComp() {
                     >
                         Extract & Download File
                     </Button>
-                </Center>
+                </Group>
             </Stack>
         </Card>
     )

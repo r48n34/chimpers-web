@@ -1,15 +1,17 @@
 export declare const binToHiddenChar: {
-    st: string;
-    "00": string;
-    "01": string;
-    "10": string;
-    "11": string;
-    en: string;
+    readonly st: "⁣";
+    readonly "00": "‌";
+    readonly "01": "‍";
+    readonly "10": "⁠";
+    readonly "11": "⁢";
+    readonly en: "⁤";
 };
+export type BinChar = keyof typeof binToHiddenChar;
 export declare const hiddenCharTobin: {
-    "8204": string;
-    "8205": string;
-    "8288": string;
-    "8290": string;
+    readonly "8204": "00";
+    readonly "8205": "01";
+    readonly "8288": "10";
+    readonly "8290": "11";
 };
+export type HiddenCharKey = keyof typeof hiddenCharTobin;
 export declare const hiddenCharTobinNum: number[];

@@ -1,4 +1,4 @@
-import { FileInput, Grid, Group, Button, Textarea, Text, Card, Stack, Divider, rem } from "@mantine/core";
+import { FileInput, Grid, Group, Button, Textarea, Text, Card, Stack, rem } from "@mantine/core";
 import { useForm } from '@mantine/form';
 import { addFileInText } from "chimpers-web"
 import { useState } from "react";
@@ -25,15 +25,15 @@ function EncodeStrComp() {
             inputString: (value) => (
                 !value
                     ? 'Missing string'
-                    : !value.includes(" ")
-                        ? "Text should contain at least one spacing"
-                        : null
+                    // : !value.includes(" ")
+                    //     ? "Text should contain at least one spacing"
+                    : null
             ),
             fileInput: (value) => (
                 !value
                     ? 'Missing file'
-                    : value.size / 1024 / 1024 >= 1.2 // in MiB 
-                        ? 'File must be less than 1.2MB'
+                    : value.size / 1024 / 1024 >= 1 // in MiB 
+                        ? 'File must be less than 1MB'
                         : null
             ),
         }
@@ -54,7 +54,7 @@ function EncodeStrComp() {
                 position: "top-right"
             });
         } catch (e: any) {
-             toast.error(e.message || "Something went wrong", { position: "top-right" });
+            toast.error(e.message || "Something went wrong", { position: "top-right" });
         }
 
         setIsLoading(false)
@@ -70,7 +70,7 @@ function EncodeStrComp() {
                                 <Text fw={500} size="lg" mb="sm">1. Choose text and file</Text>
                                 <Text c="dimmed" size="sm" mb="md">Provide the carrier string (must contain spaces) and the file you want to hide.</Text>
                             </div>
-                            
+
                             <Textarea
                                 placeholder="Example: Here is a lovely message with a secret..."
                                 minRows={4}
@@ -84,21 +84,27 @@ function EncodeStrComp() {
                                 <FileInput
                                     placeholder="Click to browse or drop file here"
                                     label="File to Hide"
-                                    description="Maximum size: 1.4MB"
+                                    description="Maximum size: 1MB"
                                     leftSection={<IconUpload style={{ width: rem(18), height: rem(18) }} />}
                                     withAsterisk
                                     {...form.getInputProps('fileInput')}
                                 />
                             </div>
 
-                            <Button 
-                                type="submit" 
-                                mt="sm" 
-                                size="md" 
+                            <Button
+                                type="submit"
+                                mt="sm"
+                                size="md"
+                                disabled={
+                                    form.values.inputString.trim() === ""
+                                    || form.values.fileInput === null
+                                    || form.errors.inputString !== undefined
+                                    || form.errors.fileInput !== undefined
+                                }
                                 loading={isLoading}
                                 leftSection={<IconWand style={{ width: rem(18), height: rem(18) }} />}
                             >
-                                Generate Magic String
+                                Generate Hidden String
                             </Button>
                         </Stack>
                     </form>
@@ -114,7 +120,7 @@ function EncodeStrComp() {
                         <Textarea
                             placeholder="Your encoded string will appear here..."
                             minRows={7}
-                            label="Output String"
+                            label="Output Result"
                             readOnly
                             value={outputString}
                             styles={{ input: { cursor: 'text' } }}

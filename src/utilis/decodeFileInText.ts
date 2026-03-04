@@ -1,4 +1,4 @@
-import { hiddenCharTobin } from "../data/dataChar";
+import { hiddenCharTobin, type HiddenCharKey } from "../data/dataChar";
 import { stringDataDecode } from "../data/stringDataDecode";
 
 export function decodeFileInText(
@@ -15,10 +15,10 @@ export function decodeFileInText(
 
     // Decode
     for(let i = 0; i < finalArray.length; i += 4){
-        const codeBin = hiddenCharTobin[finalArray[i].charCodeAt(0)]
-        + hiddenCharTobin[finalArray[i + 1].charCodeAt(0)]
-        + hiddenCharTobin[finalArray[i + 2].charCodeAt(0)]
-        + hiddenCharTobin[finalArray[i + 3].charCodeAt(0)]
+        const codeBin = hiddenCharTobin[finalArray[i].charCodeAt(0).toString() as HiddenCharKey]
+        + hiddenCharTobin[finalArray[i + 1].charCodeAt(0).toString() as HiddenCharKey]
+        + hiddenCharTobin[finalArray[i + 2].charCodeAt(0).toString() as HiddenCharKey]
+        + hiddenCharTobin[finalArray[i + 3].charCodeAt(0).toString() as HiddenCharKey]
 
         bufferArr.push(parseInt(codeBin, 2));
     }

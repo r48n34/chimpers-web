@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.encodeFile = exports.dec2bin = void 0;
+exports.dec2bin = dec2bin;
+exports.encodeFile = encodeFile;
 const dataChar_1 = require("../data/dataChar");
 function dec2bin(dec) {
     let decStr = (dec >>> 0).toString(2);
@@ -10,18 +11,17 @@ function dec2bin(dec) {
     }
     return decStr;
 }
-exports.dec2bin = dec2bin;
 function encodeFile(data) {
     let finalArray = [];
     // Encode
     for (let v of data) {
         const binStr = dec2bin(v);
         for (let i = 0; i < 7; i += 2) {
-            const code = binStr[i] + binStr[i + 1];
-            finalArray.push(dataChar_1.binToHiddenChar[code]);
+            const code = (binStr[i] + binStr[i + 1]);
+            const strls = dataChar_1.binToHiddenChar[code];
+            finalArray.push(strls);
         }
     }
     return finalArray;
 }
-exports.encodeFile = encodeFile;
 //# sourceMappingURL=encodeFile.js.map

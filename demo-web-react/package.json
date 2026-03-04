@@ -15,7 +15,7 @@
     "@mantine/form": "^8.0.0",
     "@mantine/hooks": "^8.0.0",
     "@tabler/icons-react": "^3.38.0",
-    "chimpers-web": "^1.1.2",
+    "chimpers-web": "^2.0.0",
     "magic-bytes.js": "^1.0.14",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
