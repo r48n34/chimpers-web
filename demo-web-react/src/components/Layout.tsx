@@ -8,7 +8,7 @@ function Layout({ children }: any) {
 
     return (
         <>
-            <Group position="right" mt={16} mr={16}>
+            <Group justify="flex-end" mt={16} mr={16}>
                 <GoUrlBtn title="Github" url={"https://github.com/r48n34/chimpers-web"} icon={<IconBrandGithubFilled size={16}/>}/>
                 <GoUrlBtn title="npm" url={"https://www.npmjs.com/package/chimpers-web"} icon={<IconBrandNpm size={16}/>}/>
                 <ToggleThemeBtn/>

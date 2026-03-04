@@ -1,117 +1,143 @@
-import { FileInput, Grid, Group, Button, Textarea, Text } from "@mantine/core";
+import { FileInput, Grid, Group, Button, Textarea, Text, Card, Stack, Divider, rem } from "@mantine/core";
 import { useForm } from '@mantine/form';
 import { addFileInText } from "chimpers-web"
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { copyText } from "../utils/copyStr";
+import { IconUpload, IconCopy, IconWand } from "@tabler/icons-react";
 
 interface FormObject {
     inputString: string,
     fileInput: File | null,
 }
 
-function EncodeStrComp(){
+function EncodeStrComp() {
 
-    const [ isLoading, setIsLoading ] = useState<boolean>(false);
-    const [ outputString, setOutputString ] = useState<string>("");
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [outputString, setOutputString] = useState<string>("");
 
     const form = useForm<FormObject>({
         initialValues: {
-            inputString: 'hello mate',
+            inputString: 'Hello mate!',
             fileInput: null,
         },
         validate: {
             inputString: (value) => (
-                !value 
-                ? 'Missing string'
-                : !value.includes(" ")
-                ? "Text should contain at least one spacing"
-                : null
+                !value
+                    ? 'Missing string'
+                    : !value.includes(" ")
+                        ? "Text should contain at least one spacing"
+                        : null
             ),
             fileInput: (value) => (
-                !value 
-                ? 'Missing file'
-                : value.size / 1024 / 1024 >= 1.4 // in MiB 
-                ? 'file too big'
-                : null
+                !value
+                    ? 'Missing file'
+                    : value.size / 1024 / 1024 >= 1.2 // in MiB 
+                        ? 'File must be less than 1.2MB'
+                        : null
             ),
         }
     });
 
-    async function toEncodedString(values: FormObject){
+    async function toEncodedString(values: FormObject) {
         setIsLoading(true)
 
-        const encodedString: string = await addFileInText(
-            values.inputString,
-            values.fileInput as File
-        );
+        try {
+            const encodedString: string = await addFileInText(
+                values.inputString,
+                values.fileInput as File
+            );
 
-        copyText(encodedString);
-        setOutputString(encodedString);
+            setOutputString(encodedString);
 
-        toast.success("Enjoy your string.", {
-            position: "top-right"
-        });
+            toast.success("Successfully hidden the file into the text!", {
+                position: "top-right"
+            });
+        } catch (e: any) {
+             toast.error(e.message || "Something went wrong", { position: "top-right" });
+        }
 
         setIsLoading(false)
     }
 
     return (
-        <>
-        <Text ta="center" fz={24} fw={300} mb={16}>
-            Hide file in string
-        </Text>
+        <Card shadow="sm" padding="xl" radius="md" withBorder>
+            <Grid gutter="xl" align="flex-start">
+                <Grid.Col span={{ base: 12, md: 6 }}>
+                    <form onSubmit={form.onSubmit((values) => toEncodedString(values))}>
+                        <Stack gap="md">
+                            <div>
+                                <Text fw={500} size="lg" mb="sm">1. Choose text and file</Text>
+                                <Text c="dimmed" size="sm" mb="md">Provide the carrier string (must contain spaces) and the file you want to hide.</Text>
+                            </div>
+                            
+                            <Textarea
+                                placeholder="Example: Here is a lovely message with a secret..."
+                                minRows={4}
+                                label="Carrier String"
+                                description="The visible text that will conceal the file"
+                                withAsterisk
+                                {...form.getInputProps('inputString')}
+                            />
 
-        <Grid>
-        <Grid.Col md={6}>
-            <form onSubmit={form.onSubmit((values) => toEncodedString(values))}>
-            <Textarea
-                placeholder="inputString"
-                minRows={3}
-                label="Input String"
-                withAsterisk
-                {...form.getInputProps('inputString')}
-            />
+                            <div>
+                                <FileInput
+                                    placeholder="Click to browse or drop file here"
+                                    label="File to Hide"
+                                    description="Maximum size: 1.4MB"
+                                    leftSection={<IconUpload style={{ width: rem(18), height: rem(18) }} />}
+                                    withAsterisk
+                                    {...form.getInputProps('fileInput')}
+                                />
+                            </div>
 
-            <FileInput
-                mt={12}
-                placeholder="Pick file"
-                label="File"
-                withAsterisk
-                {...form.getInputProps('fileInput')}
-            />
-            <Text c="dimmed" fz="xs" mt={4}>Should not be bigger than 1.4MB</Text>
+                            <Button 
+                                type="submit" 
+                                mt="sm" 
+                                size="md" 
+                                loading={isLoading}
+                                leftSection={<IconWand style={{ width: rem(18), height: rem(18) }} />}
+                            >
+                                Generate Magic String
+                            </Button>
+                        </Stack>
+                    </form>
+                </Grid.Col>
 
-            <Group position="right" mt="md">
-                <Button type="submit" variant="light" loading={isLoading}>Submit</Button>
-            </Group>
+                <Grid.Col span={{ base: 12, md: 6 }}>
+                    <Stack gap="md" h="100%">
+                        <div>
+                            <Text fw={500} size="lg" mb="sm">2. Result</Text>
+                            <Text c="dimmed" size="sm" mb="md">Copy the encoded string and share it. It will look like normal text to others.</Text>
+                        </div>
 
-            </form>
-        </Grid.Col>
+                        <Textarea
+                            placeholder="Your encoded string will appear here..."
+                            minRows={7}
+                            label="Output String"
+                            readOnly
+                            value={outputString}
+                            styles={{ input: { cursor: 'text' } }}
+                        />
 
-        <Grid.Col md={6}>
-
-            <Textarea
-                placeholder="outputString"
-                label="outputString"
-                withAsterisk
-                value={outputString}
-            />
-
-            <Group position="right" mt="md">
-                <Button
-                    variant="light"
-                    disabled={!outputString}
-                    onClick={ () => copyText(outputString) }
-                >
-                    Copy
-                </Button>
-            </Group>
-
-        </Grid.Col>
-        </Grid>
-        </>
+                        <Group justify="flex-end" mt="auto">
+                            <Button
+                                variant="light"
+                                disabled={!outputString}
+                                onClick={() => {
+                                    copyText(outputString);
+                                    toast.success("Copied to clipboard!", { position: "top-right" });
+                                }}
+                                leftSection={<IconCopy style={{ width: rem(18), height: rem(18) }} />}
+                            >
+                                Copy to Clipboard
+                            </Button>
+                        </Group>
+                    </Stack>
+                </Grid.Col>
+            </Grid>
+        </Card>
     )
 }
-    
+
 export default EncodeStrComp

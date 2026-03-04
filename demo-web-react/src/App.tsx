@@ -1,8 +1,11 @@
-import { MantineProvider, ColorSchemeProvider, ColorScheme } from '@mantine/core';
+import '@mantine/core/styles.css';
+import { MantineProvider } from '@mantine/core';
 import { useHotkeys, useLocalStorage } from '@mantine/hooks';
 import HomePage from './pages/HomePage';
 import Layout from './components/Layout';
 import { Toaster } from 'react-hot-toast';
+
+type ColorScheme = 'light' | 'dark' | 'auto';
 
 export default function App() {
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
@@ -17,13 +20,11 @@ export default function App() {
   useHotkeys([['mod+J', () => toggleColorScheme()]]);
 
   return (
-    <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
-      <MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS>
-        <Toaster />
-        <Layout>
+    <MantineProvider defaultColorScheme={colorScheme}>
+      <Toaster />
+      <Layout>
         <HomePage />
-        </Layout>
-      </MantineProvider>
-    </ColorSchemeProvider>
+      </Layout>
+    </MantineProvider>
   );
 }
